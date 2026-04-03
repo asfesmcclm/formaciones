@@ -1,4 +1,4 @@
-const CACHE_NAME = 'fesmcugt-v1';
+const CACHE_NAME = 'fesmcugt-v2';
 const urlsToCache = [
   './',
   './index.html',
