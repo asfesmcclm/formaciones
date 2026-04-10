@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#C8102E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Jornada UGT CLM">
+  <title>Organización, Derechos y Futuro del Trabajo · UGT FeSMC CLM</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red:         #C8102E;
+      --red-dark:    #8B0B1F;
+      --red-light:   #E8192F;
+      --black:       #0D0D0D;
+      --black-soft:  #1A1010;
+      --charcoal:    #2A2020;
+      --amber:       #E8A020;
+      --amber-light: #F5B833;
+      --white:       #FFFFFF;
+      --off-white:   #F5F0EC;
+      --gray-light:  #D8D0C8;
+      --gray-mid:    #8A7878;
+      --cream:       #F7F3EE;
+
+      --font-display:   'Oswald', sans-serif;
+      --font-condensed: 'Barlow Condensed', sans-serif;
+      --font-body:      'Barlow', sans-serif;
+
+      --header-h: 68px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      color: var(--white);
+      background: var(--black);
+      min-height: 100dvh;
+      overflow-x: hidden;
+    }
+
+    /* ─── FIXED BACKGROUND ─── */
+    .bg-fixed {
+      position: fixed;
+      inset: 0;
+      background: url('fondo.png') center top / cover no-repeat;
+      filter: brightness(0.18) saturate(0.5);
+      z-index: 0;
+    }
+
+    .bg-vignette {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(200,16,46,0.18) 0%, transparent 55%),
+        linear-gradient(to bottom, rgba(13,13,13,0.4) 0%, rgba(13,13,13,0.85) 100%);
+      z-index: 0;
+    }
+
+    /* ─── HEADER ─── */
+    .app-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 200;
+      background: rgba(13,13,13,0.92);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 2px solid var(--red);
+    }
+
+    .header-logo { display: flex; align-items: center; gap: 10px; }
+
+    .logo-ugt {
+      font-family: var(--font-display);
+      font-size: 1.85rem; /* +10% */
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 2px;
+      line-height: 1;
+    }
+
+    .logo-sep { width: 2px; height: 28px; background: rgba(200,16,46,0.4); }
+
+    .logo-fesmc { line-height: 1.15; }
+    .logo-fesmc .fn {
+      font-family: var(--font-display);
+      font-size: 0.94rem; /* +10% */
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+    .logo-fesmc .fr {
+      font-family: var(--font-body);
+      font-size: 0.66rem; /* +10% */
+      font-weight: 300;
+      color: var(--gray-mid);
+    }
+
+    /* ─── HEADER BADGES GROUP ─── */
+    .header-badges {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ─── LOCATION BADGE ─── */
+    .location-badge {
+      background: var(--amber);
+      color: var(--black);
+      font-family: var(--font-display);
+      font-size: 0.68rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 20px;
+      line-height: 1.4;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .location-badge svg {
+      width: 12px;
+      height: 12px;
+      flex-shrink: 0;
+    }
+
+    .date-badge {
+      background: var(--red);
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 0.68rem; /* +10% */
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      padding: 5px 11px;
+      border-radius: 20px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    /* Ajuste para pantallas muy pequeñas */
+    @media (max-width: 360px) {
+      .location-badge,
+      .date-badge {
+        font-size: 0.64rem; /* +10% */
+        padding: 4px 9px;
+      }
+      .header-badges {
+        gap: 6px;
+      }
+    }
+
+    /* ─── SCROLL WRAPPER ─── */
+    .scroll-content {
+      position: relative;
+      z-index: 10;
+      padding-top: var(--header-h);
+    }
+
+    /* ─── HERO ─── */
+    .hero { padding: 52px 20px 36px; }
+
+    .hero-eyebrow {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 12px;
+      opacity: 0;
+      animation: fadeUp 0.65s 0.1s ease forwards;
+    }
+
+    .hero-label {
+      display: inline-block;
+      background: var(--red);
+      font-family: var(--font-condensed);
+      font-size: 0.72rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      padding: 4px 10px;
+      margin-bottom: 14px;
+      opacity: 0;
+      animation: fadeUp 0.65s 0.05s ease forwards;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.1rem, 9.4vw, 3.5rem); /* +10% */
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: 0.5px;
+      margin-bottom: 16px;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp 0.65s 0.2s ease forwards;
+    }
+
+    .hero-title em { font-style: normal; color: var(--red); }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 1rem; /* +10% */
+      font-weight: 300;
+      color: var(--gray-light);
+      font-style: italic;
+      line-height: 1.65;
+      opacity: 0;
+      animation: fadeUp 0.65s 0.32s ease forwards;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ─── INFO STRIP ─── */
+    .info-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(200,16,46,0.25);
+      border-top: 2px solid var(--red);
+      border-bottom: 1px solid rgba(200,16,46,0.2);
+    }
+
+    .info-cell {
+      background: rgba(13,13,13,0.92);
+      padding: 16px 8px;
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+    }
+
+    .info-cell svg { width: 20px; height: 20px; color: var(--amber); }
+    .info-cell .lbl {
+      font-family: var(--font-condensed);
+      font-size: 0.63rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    .info-cell .val {
+      font-family: var(--font-display);
+      font-size: 0.97rem; /* +10% */
+      font-weight: 600;
+      color: var(--white);
+      text-align: center;
+      line-height: 1.25;
+    }
+
+    /* ─── LOCATION BUTTON ─── */
+    .location-block {
+      padding: 0 20px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .location-address {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+    }
+
+    .location-address svg { width: 18px; height: 18px; color: var(--amber); flex-shrink: 0; margin-top: 2px; }
+
+    .location-address-text { flex: 1; }
+    .location-name {
+      font-family: var(--font-display);
+      font-size: 0.97rem; /* +10% */
+      font-weight: 600;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .location-street {
+      font-family: var(--font-body);
+      font-size: 0.86rem; /* +10% */
+      color: var(--gray-mid);
+      margin-top: 2px;
+      line-height: 1.5;
+    }
+
+    .map-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .map-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 11px 10px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-family: var(--font-condensed);
+      font-size: 0.79rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: transform 0.15s, opacity 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .map-btn:active { transform: scale(0.96); opacity: 0.85; }
+
+    .map-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .map-btn-google {
+      background: #4285F4;
+      color: var(--white);
+    }
+
+    .map-btn-apple {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: var(--white);
+    }
+
+    /* ─── GENERIC BLOCKS ─── */
+    .block { padding: 28px 20px; }
+
+    .block-dark {
+      background: rgba(13,13,13,0.88);
+      border-top: 1px solid rgba(200,16,46,0.2);
+    }
+
+    .block-darker {
+      background: rgba(26,16,16,0.75);
+      border-top: 1px solid rgba(200,16,46,0.12);
+    }
+
+    .block-red {
+      background: linear-gradient(135deg, var(--red-dark), var(--red));
+      border-top: none;
+    }
+
+    .block-black {
+      background: var(--black);
+      border-top: 2px solid var(--red);
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .sec-label {
+      font-family: var(--font-condensed);
+      font-size: 0.68rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--amber);
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .sec-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(232,160,32,0.2);
+    }
+
+    .sec-label-white {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .sec-label-white::after {
+      background: rgba(255,255,255,0.12);
+    }
+
+    /* ─── OBJETIVOS ─── */
+    .objectives-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .objective-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(200,16,46,0.08);
+      border: 1px solid rgba(200,16,46,0.2);
+      border-left: 3px solid var(--red);
+      border-radius: 0 8px 8px 0;
+      font-family: var(--font-body);
+      font-size: 0.94rem; /* +10% */
+      font-weight: 500;
+      color: var(--off-white);
+      line-height: 1.5;
+    }
+
+    .objective-num {
+      font-family: var(--font-display);
+      font-size: 1.21rem; /* +10% */
+      font-weight: 700;
+      color: var(--red);
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 1px;
+    }
+
+    /* ─── ACCORDION MESAS ─── */
+    .mesas-wrap { display: flex; flex-direction: column; gap: 10px; }
+
+    .module-item {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(200,16,46,0.2);
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .module-item.open {
+      border-color: var(--red);
+      box-shadow: 0 4px 20px rgba(200,16,46,0.2);
+    }
+
+    .module-trigger {
+      width: 100%;
+      background: rgba(26,16,16,0.95);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      text-align: left;
+      display: flex;
+      align-items: stretch;
+      transition: background 0.25s;
+    }
+
+    .module-item.open .module-trigger { background: rgba(200,16,46,0.12); }
+
+    .module-num-col {
+      width: 52px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(200,16,46,0.08);
+      border-right: 1px solid rgba(200,16,46,0.18);
+      padding: 18px 0;
+      transition: background 0.3s;
+    }
+
+    .module-item.open .module-num-col { background: var(--red); }
+
+    .module-num-text {
+      font-family: var(--font-display);
+      font-size: 1.55rem; /* +10% */
+      font-weight: 700;
+      color: rgba(200,16,46,0.4);
+      line-height: 1;
+      transition: color 0.3s;
+    }
+
+    .module-item.open .module-num-text { color: var(--white); }
+
+    .module-text-col { flex: 1; padding: 15px 12px; min-width: 0; }
+
+    .module-tag {
+      font-family: var(--font-condensed);
+      font-size: 0.64rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--amber);
+      margin-bottom: 3px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .module-item.open .module-tag { opacity: 1; }
+
+    .module-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem; /* +10% */
+      font-weight: 600;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      line-height: 1.25;
+    }
+
+    .module-teaser {
+      font-family: var(--font-body);
+      font-size: 0.79rem; /* +10% */
+      color: var(--gray-mid);
+      margin-top: 4px;
+      line-height: 1.4;
+      transition: opacity 0.2s, max-height 0.3s;
+      max-height: 40px;
+      overflow: hidden;
+    }
+
+    .module-item.open .module-teaser { opacity: 0; max-height: 0; margin-top: 0; }
+
+    .module-chevron {
+      flex-shrink: 0;
+      width: 40px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .module-chevron svg {
+      width: 18px; height: 18px;
+      color: var(--gray-mid);
+      transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1), color 0.3s;
+    }
+
+    .module-item.open .module-chevron svg { transform: rotate(180deg); color: var(--amber); }
+
+    .module-body {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.42s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .module-item.open .module-body { grid-template-rows: 1fr; }
+
+    .module-body-inner { overflow: hidden; }
+
+    .module-body-content {
+      padding: 0 16px 18px 52px;
+      border-top: 1px solid rgba(200,16,46,0.15);
+      background: rgba(200,16,46,0.05);
+    }
+
+    .mesa-enfoque {
+      font-family: var(--font-body);
+      font-size: 0.86rem; /* +10% */
+      font-style: italic;
+      color: var(--amber);
+      padding: 10px 0 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 10px;
+    }
+
+    .module-body-content ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .module-body-content .subtitulo {
+      font-family: var(--font-condensed);
+      font-size: 0.68rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+
+    .module-body-content li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: var(--font-body);
+      font-size: 0.9rem; /* +10% */
+      color: rgba(220,210,205,0.85);
+      line-height: 1.55;
+    }
+
+    .module-body-content li::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--red);
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    /* ─── CONCLUSIONES ─── */
+    .conclusiones-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .conclusion-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .conclusion-icon {
+      width: 36px; height: 36px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: rgba(200,16,46,0.15);
+      border: 1px solid rgba(200,16,46,0.3);
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .conclusion-icon svg { width: 16px; height: 16px; color: var(--amber); }
+
+    .conclusion-title {
+      font-family: var(--font-display);
+      font-size: 0.9rem; /* +10% */
+      font-weight: 600;
+      color: var(--white);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .conclusion-desc {
+      font-family: var(--font-body);
+      font-size: 0.86rem; /* +10% */
+      color: var(--gray-mid);
+      line-height: 1.55;
+    }
+
+    /* ─── RECONOCIMIENTOS ─── */
+    .reconocimientos-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .reconocimiento-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px;
+      background: rgba(255,255,255,0.03);
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-left: 3px solid var(--amber);
+    }
+
+    .reconoc-medal {
+      font-size: 1.65rem; /* +10% */
+      flex-shrink: 0;
+    }
+
+    .reconoc-title {
+      font-family: var(--font-display);
+      font-size: 0.97rem; /* +10% */
+      font-weight: 600;
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 3px;
+    }
+
+    .reconoc-desc {
+      font-family: var(--font-body);
+      font-size: 0.86rem; /* +10% */
+      color: var(--gray-mid);
+      line-height: 1.5;
+    }
+
+    /* ─── LEMA FINAL ─── */
+    .lema-block {
+      padding: 40px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lema-block::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 12px;
+      font-family: var(--font-display);
+      font-size: 8.8rem; /* +10% */
+      font-weight: 700;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+    }
+
+    .lema-text {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 6.1vw, 2.2rem); /* +10% */
+      font-weight: 700;
+      text-transform: uppercase;
+      line-height: 1.25;
+      letter-spacing: 1px;
+      color: var(--white);
+      position: relative;
+      z-index: 1;
+    }
+
+    .lema-text em { font-style: normal; color: var(--amber); }
+
+    .lema-org {
+      font-family: var(--font-condensed);
+      font-size: 0.79rem; /* +10% */
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .lema-line {
+      width: 40px;
+      height: 2px;
+      background: var(--red);
+      margin: 14px auto 16px;
+    }
+
+    /* ─── INSCRIPCIÓN ─── */
+    .insc-banner {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-top: 3px solid var(--amber);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .insc-title {
+      font-family: var(--font-display);
+      font-size: 1.55rem; /* +10% */
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--amber);
+    }
+
+    .insc-sub {
+      font-family: var(--font-body);
+      font-size: 0.86rem; /* +10% */
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      margin-top: 5px;
+    }
+
+    .insc-note {
+      font-family: var(--font-body);
+      font-size: 0.86rem; /* +10% */
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      padding: 12px 14px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.07);
+      margin-bottom: 14px;
+    }
+
+    /* ─── MEGA QR LINK ─── */
+    .mega-qr-link {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      margin-top: 8px;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 2px solid var(--red);
+      transition: border-color 0.25s, transform 0.2s;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .mega-qr-link:active { transform: scale(0.97); }
+
+    .qr-instruction-main {
+      width: 100%;
+      padding: 13px 20px 11px;
+      text-align: center;
+      font-family: var(--font-condensed);
+      font-size: 0.79rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: rgba(200,16,46,0.3);
+      border-bottom: 1px solid rgba(200,16,46,0.3);
+    }
+
+    .qr-frame-unified {
+      width: 100%;
+      padding: 22px 40px 18px;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .qr-frame-unified img {
+      width: 100%;
+      max-width: 210px;
+      height: auto;
+      display: block;
+      border-radius: 10px;
+      background: #fff;
+      padding: 10px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.5);
+    }
+
+    .qr-action-text {
+      width: 100%;
+      padding: 13px 20px 14px;
+      text-align: center;
+      font-family: var(--font-display);
+      font-size: 1.1rem; /* +10% */
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .qr-action-text::after {
+      content: '';
+      display: inline-block;
+      width: 16px; height: 16px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%23fff' stroke-width='2.5' viewBox='0 0 24 24'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E") center/contain no-repeat;
+      flex-shrink: 0;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 10px;
+      padding: 16px;
+      margin-top: 14px;
+    }
+
+    .contact-lbl {
+      font-family: var(--font-condensed);
+      font-size: 0.66rem; /* +10% */
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 10px;
+    }
+
+    .email-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-family: var(--font-body);
+      font-size: 0.9rem; /* +10% */
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .email-link:last-child { border-bottom: none; padding-bottom: 0; }
+    .email-link:active { color: var(--amber); }
+    .email-link svg { width: 15px; height: 15px; color: var(--red); flex-shrink: 0; }
+
+    /* ─── FOOTER ─── */
+    .page-footer {
+      padding: 24px 20px;
+      text-align: center;
+      background: var(--black);
+      border-top: 2px solid var(--red);
+    }
+
+    .footer-lema {
+      font-family: var(--font-display);
+      font-size: 0.83rem; /* +10% */
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+
+    .page-footer p {
+      font-family: var(--font-body);
+      font-size: 0.75rem; /* +10% */
+      color: rgba(255,255,255,0.25);
+      line-height: 1.8;
+    }
+
+    .page-footer strong { color: rgba(255,255,255,0.45); }
+
+    /* ─── REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.vis { opacity: 1; transform: none; }
+    .reveal:nth-child(2) { transition-delay: 0.07s; }
+    .reveal:nth-child(3) { transition-delay: 0.14s; }
+    .reveal:nth-child(4) { transition-delay: 0.21s; }
+    .reveal:nth-child(5) { transition-delay: 0.28s; }
+  </style>
+</head>
+<body>
+
+<div class="bg-fixed"></div>
+<div class="bg-vignette"></div>
+
+<!-- HEADER -->
+<header class="app-header">
+  <div class="header-logo">
+    <span class="logo-ugt">UGT</span>
+    <div class="logo-sep"></div>
+    <div class="logo-fesmc">
+      <div class="fn">FeSMC</div>
+      <div class="fr">Castilla-La Mancha</div>
+    </div>
+  </div>
+  
+  <div class="header-badges">
+    <!-- Badge de ubicación -->
+    <div class="location-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      Marchamalo
+    </div>
+    
+    <!-- Badge de fecha (existente) -->
+    <div class="date-badge">16 JUN<br>2026</div>
+  </div>
+</header>
+
+<div class="scroll-content">
+
+  <!-- ① HERO -->
+  <section class="hero">
+    <div class="hero-label">Sindicato de Clase</div>
+    <p class="hero-eyebrow">Jornada Sindical · Marchamalo 2026</p>
+    <h1 class="hero-title">Organización,<br>Derechos y<br><em>Futuro</em><br>del Trabajo</h1>
+    <p class="hero-subtitle">UGT · FeSMC · Castilla-La Mancha</p>
+  </section>
+
+  <!-- ② INFO STRIP -->
+  <div class="info-strip">
+    <div class="info-cell">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+        <line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line>
+        <line x1="3" y1="10" x2="21" y2="10"></line>
+      </svg>
+      <span class="lbl">Fecha</span>
+      <span class="val">16 jun. 2026</span>
+    </div>
+    <div class="info-cell">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
+      </svg>
+      <span class="lbl">Horario</span>
+      <span class="val">10:00 – 18:00</span>
+    </div>
+    <div class="info-cell">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      <span class="lbl">Lugar</span>
+      <span class="val">Ateneo Arriaca · C/Cercado, 2 · 19180 Marchamalo</span>
+    </div>
+  </div>
+
+ 
+  <!-- ④ OBJETIVOS -->
+  <section class="block block-darker">
+    <p class="sec-label">Objetivos del acto</p>
+    <div class="objectives-list">
+      <div class="objective-item reveal">
+        <span class="objective-num">01</span>
+        Reforzar el papel del sindicato de clase en la defensa de los derechos de las personas trabajadoras
+      </div>
+      <div class="objective-item reveal">
+        <span class="objective-num">02</span>
+        Analizar los retos del mundo laboral: digitalización, transición justa y precariedad
+      </div>
+      <div class="objective-item reveal">
+        <span class="objective-num">03</span>
+        Generar propuestas colectivas y compromisos sindicales concretos
+      </div>
+      <div class="objective-item reveal">
+        <span class="objective-num">04</span>
+        Fortalecer la unidad de la clase trabajadora frente a los desafíos actuales
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑤ MESAS DE DEBATE — ACORDEÓN -->
+  <section class="block block-dark">
+    <p class="sec-label">Estructura del acto · 4 Mesas + Clausura</p>
+    <div class="mesas-wrap">
+
+      <div class="module-item reveal" id="m1">
+        <button class="module-trigger" onclick="toggleModule('m1')" aria-expanded="false">
+          <div class="module-num-col"><span class="module-num-text">1</span></div>
+          <div class="module-text-col">
+            <p class="module-tag">Sindicalismo de clase</p>
+            <p class="module-name">Negociación Colectiva y Salarios</p>
+            <p class="module-teaser">SMI · Reducción de jornada · Revisión salarial</p>
+          </div>
+          <div class="module-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </button>
+        <div class="module-body"><div class="module-body-inner"><div class="module-body-content">
+          <p class="mesa-enfoque">Mesa central del sindicalismo de clase · Intervención directa en el reparto de la riqueza</p>
+          <p class="subtitulo">Temas clave</p>
+          <ul>
+            <li>Salario Mínimo Interprofesional: subida justa vinculada al coste de vida</li>
+            <li>Reducción de la jornada laboral sin pérdida salarial</li>
+            <li>Cláusulas de revisión salarial según la inflación real</li>
+          </ul>
+          <p class="subtitulo" style="margin-top:12px;">Debate</p>
+          <ul>
+            <li>Recuperación del poder adquisitivo de los trabajadores</li>
+            <li>Beneficios empresariales vs. salarios dignos</li>
+            <li>Papel estratégico de la negociación colectiva</li>
+          </ul>
+        </div></div></div>
+      </div>
+
+      <div class="module-item reveal" id="m2">
+        <button class="module-trigger" onclick="toggleModule('m2')" aria-expanded="false">
+          <div class="module-num-col"><span class="module-num-text">2</span></div>
+          <div class="module-text-col">
+            <p class="module-tag">Digitalización · Clima</p>
+            <p class="module-name">Transición Justa y Digitalización</p>
+            <p class="module-teaser">IA · Empleos verdes · Derechos digitales</p>
+          </div>
+          <div class="module-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </button>
+        <div class="module-body"><div class="module-body-inner"><div class="module-body-content">
+          <p class="mesa-enfoque">Nueva definición de clase trabajadora en el siglo XXI · Impacto de la tecnología y el cambio climático</p>
+          <p class="subtitulo">Temas clave</p>
+          <ul>
+            <li>Inteligencia Artificial y su impacto en el empleo</li>
+            <li>Derecho a la desconexión digital</li>
+            <li>Formación y reconversión hacia empleos verdes</li>
+          </ul>
+          <p class="subtitulo" style="margin-top:12px;">Debate</p>
+          <ul>
+            <li>Evitar despidos bajo la excusa tecnológica</li>
+            <li>Garantizar transiciones laborales justas y planificadas</li>
+            <li>Derechos laborales plenos en la era digital</li>
+          </ul>
+        </div></div></div>
+      </div>
+
+      <div class="module-item reveal" id="m3">
+        <button class="module-trigger" onclick="toggleModule('m3')" aria-expanded="false">
+          <div class="module-num-col"><span class="module-num-text">3</span></div>
+          <div class="module-text-col">
+            <p class="module-tag">Estado del Bienestar</p>
+            <p class="module-name">Protección Social y Servicios Públicos</p>
+            <p class="module-teaser">Pensiones · Sanidad · Dependencia</p>
+          </div>
+          <div class="module-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </button>
+        <div class="module-body"><div class="module-body-inner"><div class="module-body-content">
+          <p class="mesa-enfoque">El sindicato más allá del centro de trabajo · Defensa del salario indirecto y el Estado del Bienestar</p>
+          <p class="subtitulo">Temas clave</p>
+          <ul>
+            <li>Pensiones públicas dignas y sostenibles</li>
+            <li>Sanidad y educación públicas de calidad</li>
+            <li>Ley de Dependencia: financiación y cobertura real</li>
+          </ul>
+          <p class="subtitulo" style="margin-top:12px;">Debate</p>
+          <ul>
+            <li>Fortalecimiento del Estado del Bienestar frente a la privatización</li>
+            <li>Garantías reales para toda la clase trabajadora</li>
+          </ul>
+        </div></div></div>
+      </div>
+
+      <div class="module-item reveal" id="m4">
+        <button class="module-trigger" onclick="toggleModule('m4')" aria-expanded="false">
+          <div class="module-num-col"><span class="module-num-text">4</span></div>
+          <div class="module-text-col">
+            <p class="module-tag">Igualdad · Diversidad</p>
+            <p class="module-name">Igualdad, Diversidad y Precariedad</p>
+            <p class="module-teaser">Brecha salarial · LGTBI+ · Migración · Subcontratación</p>
+          </div>
+          <div class="module-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </button>
+        <div class="module-body"><div class="module-body-inner"><div class="module-body-content">
+          <p class="mesa-enfoque">Combatir la segmentación y discriminación laboral · Fortalecer la unidad en la diversidad</p>
+          <p class="subtitulo">Temas clave</p>
+          <ul>
+            <li>Brecha salarial de género: auditorías y planes de igualdad</li>
+            <li>Derechos LGTBI+ en el ámbito laboral</li>
+            <li>Derechos de trabajadores migrantes</li>
+            <li>Fin de la subcontratación abusiva</li>
+          </ul>
+          <p class="subtitulo" style="margin-top:12px;">Debate</p>
+          <ul>
+            <li>Igualdad real y efectiva en el empleo</li>
+            <li>Fin de la precariedad estructural</li>
+          </ul>
+        </div></div></div>
+      </div>
+
+      <!-- CLAUSURA -->
+      <div class="module-item reveal" id="m5">
+        <button class="module-trigger" onclick="toggleModule('m5')" aria-expanded="false">
+          <div class="module-num-col"><span class="module-num-text" style="font-size:0.83rem;letter-spacing:1px;">CIERRE</span></div>
+          <div class="module-text-col">
+            <p class="module-tag">Acto final</p>
+            <p class="module-name">Conclusiones y Clausura</p>
+            <p class="module-teaser">Síntesis · Compromisos · Llamamiento</p>
+          </div>
+          <div class="module-chevron">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+        </button>
+        <div class="module-body"><div class="module-body-inner"><div class="module-body-content">
+          <ul>
+            <li>Síntesis de las aportaciones clave de las cuatro mesas de debate</li>
+            <li>Compromisos sindicales concretos y plan de acción</li>
+            <li>Reafirmación de la unidad de la clase trabajadora</li>
+            <li>Intervención final de clausura</li>
+            <li>Llamamiento a la organización y la movilización</li>
+          </ul>
+        </div></div></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ⑥ RECONOCIMIENTOS -->
+  <section class="block block-darker">
+    <p class="sec-label">Reconocimientos</p>
+    <div class="reconocimientos-list">
+      <div class="reconocimiento-item reveal">
+        <span class="reconoc-medal">🏅</span>
+        <div>
+          <p class="reconoc-title">Delegadas y Delegados</p>
+          <p class="reconoc-desc">A quienes defienden los derechos cada día en sus centros de trabajo</p>
+        </div>
+      </div>
+      <div class="reconocimiento-item reveal">
+        <span class="reconoc-medal">⭐</span>
+        <div>
+          <p class="reconoc-title">Colectivos Destacados</p>
+          <p class="reconoc-desc">Por su esfuerzo y compromiso colectivo en la acción sindical</p>
+        </div>
+      </div>
+      <div class="reconocimiento-item reveal">
+        <span class="reconoc-medal">🌹</span>
+        <div>
+          <p class="reconoc-title">Trayectorias de Compromiso</p>
+          <p class="reconoc-desc">A quienes han dedicado su vida al sindicalismo y a la clase trabajadora</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⑦ LEMA FINAL -->
+  <section class="block block-black lema-block">
+    <p class="lema-text">
+      "La fuerza del sindicato<br>está en la <em>unidad</em><br>de la clase trabajadora"
+    </p>
+    <div class="lema-line"></div>
+    <p class="lema-org">UGT · FeSMC · Castilla-La Mancha</p>
+  </section>
+
+  <!-- ⑧ INSCRIPCIÓN -->
+  <section class="block block-dark" style="border-top: 2px solid var(--red);">
+    <p class="sec-label sec-label-white">Inscripción</p>
+
+    <div class="insc-banner reveal">
+      <p class="insc-title">Inscríbete</p>
+      <p class="insc-sub">Convocatoria abierta · Inscripción previa obligatoria</p>
+    </div>
+
+    <p class="insc-note reveal">
+      Las plazas son limitadas. La inscripción previa es necesaria para garantizar la organización del acto. Formaliza tu inscripción a través del formulario o enviando los datos por email a las direcciones indicadas.
+    </p>
+
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfJ_IV1YLYINHR5yW0WyB2MixtuAoivJSOc-LhMJTr1o3lsYA/viewform"
+       target="_blank"
+       class="mega-qr-link reveal">
+      <span class="qr-instruction-main">Pulsa o escanea para inscribirte</span>
+      <div class="qr-frame-unified">
+        <img src="qr.jpeg" alt="Código QR de inscripción — Jornada Marchamalo 2026">
+      </div>
+      <span class="qr-action-text">Abrir Formulario de Inscripción</span>
+    </a>
+
+    <div class="contact-card reveal">
+      <p class="contact-lbl">O envía tu inscripción por email a</p>
+      <a href="mailto:pacojsanchez@fesmcugt.com" class="email-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        pacojsanchez@fesmcugt.com
+      </a>
+      <a href="mailto:sgeneral.clm@fesmcugt.org" class="email-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+          <polyline points="22,6 12,13 2,6"></polyline>
+        </svg>
+        sgeneral.clm@fesmcugt.org
+      </a>
+    </div>
+  </section>
+  
+   <!-- ③ CÓMO LLEGAR -->
+  <div class="block block-dark location-block" style="padding-top:18px;">
+    <div class="location-address reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+        <circle cx="12" cy="10" r="3"></circle>
+      </svg>
+      <div class="location-address-text">
+        <p class="location-name">Ateneo Arriaca</p>
+        <p class="location-street">C. Cercado, 2 · 19180 Marchamalo, Guadalajara</p>
+      </div>
+    </div>
+    <div class="map-buttons reveal">
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Ateneo+Arriaca,+Calle+Cercado+2,+19180+Marchamalo,+Guadalajara"
+         target="_blank" class="map-btn map-btn-google">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+        </svg>
+        Google Maps
+      </a>
+      <a href="https://maps.apple.com/?daddr=Calle+Cercado+2,+19180+Marchamalo,+Guadalajara"
+         target="_blank" class="map-btn map-btn-apple">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polygon points="3 11 22 2 13 21 11 13 3 11"></polygon>
+        </svg>
+        Apple Maps
+      </a>
+    </div>
+  </div>
+
+  <footer class="page-footer">
+    <p class="footer-lema">Sindicato de Clase · Marchamalo 2026</p>
+    <p><strong>UGT · FeSMC · Castilla-La Mancha</strong></p>
+    <p>Ateneo Arriaca · C. Cercado, 2 · 19180 Marchamalo</p>
+  </footer>
+
+</div>
+
+<script>
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
+
+  function toggleModule(id) {
+    const item   = document.getElementById(id);
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.module-item.open').forEach(el => {
+      el.classList.remove('open');
+      el.querySelector('.module-trigger').setAttribute('aria-expanded', 'false');
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      item.querySelector('.module-trigger').setAttribute('aria-expanded', 'true');
+      setTimeout(() => {
+        const top = item.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }, 60);
+    }
+  }
+
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('vis'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
